@@ -1,6 +1,6 @@
 (ns helda-owgame-cli.client
   (:require
-    [clj-http.client :refer [get]]
+    [clj-http.client :refer [get post]]
     )
   )
 
@@ -37,6 +37,18 @@
     )
   )
 
-(defn perform-action [world source-id target-id action-ctx]
-
+(defn perform-action [action source-id target-id action-ctx]
+  (post
+    "http://localhost:3000/entities/perform-action"
+    {
+      :form-params {
+        :action action
+        :source-entity-id source-id
+        :target-entity-id target-id
+        :action-ctx action-ctx
+      }
+      :content-type :json
+      :as :json-strict
+      }
+    )
   )
