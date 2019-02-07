@@ -24,10 +24,16 @@
         (find-entities @cur-world ["owgame.BattleUnit"] ["npc"])
         )
       )
-    "Start new-game first!"
+    "Start (new-game) first!"
     )
   )
 
 (defn fight [target-id]
-  (perform-action target-id)
+  (if-let [hero @cur-hero]
+    (if-let [encounter @cur-encounter]
+      (perform-action :fight (:id hero) (:id encounter) {})
+      "Choose (encounter) first!"
+      )
+    "Start (new-game) first!"
+    )
   )
