@@ -28,7 +28,7 @@
     )
   )
 
-(defn fight [target-id]
+(defn fight []
   (if-let [hero @cur-hero]
     (if-let [encounter @cur-encounter]
       (perform-action :fight (:id hero) (:id encounter) {})
